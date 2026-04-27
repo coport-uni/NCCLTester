@@ -384,3 +384,31 @@ the duplicate. Plan: `/root/.claude/plans/e-conflicting-values-set-groovy-goblet
 - [x] `apt-cache policy cuda-toolkit | head` to verify NVIDIA repo is a candidate (cuda-toolkit 13.2.1-1)
 - [x] Update GitHub issue with outcome (#1 closed)
 - [x] Commit and push (ToDo update + any artefact)
+
+---
+
+## Upgrade libnccl2 / libnccl-dev to 2.28.9-1+cuda13.0
+
+### Background
+The system NCCL packages are currently held at 2.28.3-1+cuda13.0
+(`hi` flag in `dpkg -l`). The newest available `+cuda13.0` build on
+the NVIDIA repo is 2.28.9-1, which also matches the NCCL version
+PyTorch 2.11.0+cu130 ships in its wheel (`torch.cuda.nccl.version()
+== (2, 28, 9)`). Upgrading the system package aligns the two so any
+non-PyTorch usage of NCCL (raw C++, JAX, etc.) sees the same version
+PyTorch is already running with. Decision recorded in plan:
+`/root/.claude/plans/e-conflicting-values-set-groovy-goblet.md`
+(NCCL-version section). Note: this upgrade is **not** expected to
+affect the `nccl_check.py` hang because PyTorch uses its bundled
+NCCL, not the system package — the hang is a separate issue.
+
+### Work items
+- [x] Confirm ToDo contents with user
+- [x] Register GitHub issue via `gh issue create` (#2)
+- [x] `apt-mark unhold libnccl2 libnccl-dev`
+- [x] `apt install libnccl2=2.28.9-1+cuda13.0 libnccl-dev=2.28.9-1+cuda13.0`
+- [x] `apt-mark hold libnccl2 libnccl-dev`
+- [x] Verify with `dpkg -l | grep -E '^hi\s+(libnccl2|libnccl-dev)'`
+       (both at 2.28.9-1+cuda13.0, status `hi`)
+- [x] Update GitHub issue with outcome (#2 closed)
+- [x] Commit and push (ToDo update)
