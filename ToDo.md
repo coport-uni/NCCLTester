@@ -412,3 +412,72 @@ NCCL, not the system package — the hang is a separate issue.
        (both at 2.28.9-1+cuda13.0, status `hi`)
 - [x] Update GitHub issue with outcome (#2 closed)
 - [x] Commit and push (ToDo update)
+
+---
+
+## Debug nccl_check.py hang on 2x H200 NVL
+
+### Background
+Running `bash nccl_check_bash.sh` (which is `NCCL_DEBUG=INFO python3
+nccl_check.py`) hangs with both worker processes pegged at 99% CPU
+and 100% GPU-Util, no stdout for 4+ minutes, before being killed.
+The current `nccl_check_bash.sh` pipes through `| tail -40` which
+buffers all output, hiding NCCL's INFO trace. PyTorch's bundled NCCL
+2.28.9 (matches just-installed system NCCL, but PyTorch uses its
+bundled copy regardless). User selected option 2 — debug before
+pushing the local commits a033dd5 and 0d2caf1.
+
+### Approach
+- Re-run the test directly without the buffering tail, capture full
+  NCCL_DEBUG=INFO trace to a log file via `tee`.
+- If it hangs again, kill after a bounded timeout and inspect the
+  init phase from the log to identify where NCCL is stuck (rendezvous,
+  P2P negotiation, IB/RoCE detection, shm, etc.).
+- Try common bypasses (`NCCL_IB_DISABLE=1`, `NCCL_P2P_DISABLE=1`,
+  `NCCL_SOCKET_IFNAME=lo`) only after the log tells us where the hang
+  is — don't shotgun-tune.
+
+### Work items
+- [x] Confirm with user (option 2 selected)
+- [x] Register GitHub issue (#3)
+- [ ] Run `NCCL_DEBUG=INFO python3 nccl_check.py 2>&1 | tee /tmp/nccl.log`
+       with bounded timeout (paused — superseded by README task)
+- [ ] If hung: read /tmp/nccl.log, identify the last NCCL phase before
+       the silence, share with user (paused)
+- [ ] If passed: confirm output is correct, proceed to push gated
+       commits (paused)
+- [ ] Update GitHub issue with findings (paused — #3 stays open)
+- [ ] Commit and push (ToDo update) (paused)
+
+---
+
+## Write NCCLTester README documenting progress so far
+
+### Background
+User direction 2026-04-27: pause the NCCL hang debug and write a
+GitHub-facing README that summarises the work done so far on the
+new `coport-uni/NCCLTester` repo, then commit and push. The current
+`README.md` is a leftover from the CommonClaude conventions project
+and is not relevant to NCCLTester. Two local commits are unpushed
+(a033dd5 apt fix, 0d2caf1 NCCL upgrade); pushing the README will
+also push those.
+
+### Scope
+- Replace `README.md` with NCCLTester-focused content: project
+  purpose, environment, files, progress tracker (#1, #2, #3),
+  known issue (NCCL hang), how to run.
+- Include the test scripts and the project conventions file in the
+  same commit so the README's references resolve on the remote.
+  Files: `README.md`, `ToDo.md`, `CLAUDE.md`, `nccl_check.py`,
+  `nccl_check_bash.sh`, `ruff.toml`, `.claude/`.
+- Skip clearly unrelated artefacts: `CLAUDECowork.md`, `Concept.md`,
+  `LearnedPatterns.md`, `getpip.py`, `cuda-keyring_1.1-1_all.deb`.
+
+### Work items
+- [x] Confirm with user (explicit directive received)
+- [x] Register GitHub issue (#4)
+- [x] Write new `README.md`
+- [x] Stage README + ToDo + project files; commit
+- [x] `git push -u origin master` (also pushes a033dd5, 0d2caf1)
+- [x] Comment on #4 with outcome and close
+- [x] Final ToDo tick + amend if needed
