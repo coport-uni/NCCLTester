@@ -570,8 +570,9 @@ GPU 동작 여부를 한 번에 확인할 수 있게 한다.
 - [x] ruff check + format
 - [x] 검증 로그를 `claude_test/logs/diagnose_{run.log,report.json}`에
       보관 + claude_test/README.md 갱신
-- [ ] Commit and push
-- [ ] GitHub issue update
+- [x] Commit and push (93708a1)
+- [x] GitHub issue update (#6 closed via Closes-trailer; outcome
+      comment added)
 
 ### Outcome — diagnostic on current container
 
