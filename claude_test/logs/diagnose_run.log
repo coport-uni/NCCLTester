@@ -1,0 +1,26 @@
+========================================================================
+NCCL transport + Accelerate diagnosis
+========================================================================
+
+Environment:
+  torch                = 2.11.0+cu130
+  NCCL                 = 2.28.9
+  GPU count            = 2
+    [0] NVIDIA H200 NVL
+    [1] NVIDIA H200 NVL
+  /dev/shm total       = 135.01 GB
+  /dev/shm mount opts  = rw,nosuid,nodev,inode64
+  NIC interfaces       = ['eth0', 'lo']
+  InfiniBand present   = False
+  CUDA P2P matrix:
+    GPU 0 -> {1=True}
+    GPU 1 -> {0=True}
+
+Transport tests:
+  mode         status     transport                        time
+  -------------------------------------------------------------
+  default      TIMEOUT    P2P/CUMEM                      90.1s
+  shm_only     PASS       SHM/direct                      5.0s
+  net_only     PASS       NET/Socket                      4.4s
+  accelerate   TIMEOUT    P2P/CUMEM                      90.0s
+

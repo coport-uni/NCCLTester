@@ -523,6 +523,80 @@ also push those.
 - [x] Commit and push (ToDo update + claude_test additions) (a3fb564)
 - [x] GitHub issue update (#5 closed via Closes-trailer; outcome comment added)
 
+---
+
+## Portable NCCL + Accelerate diagnostic script
+
+### Background
+사용자는 PyTorch + HuggingFace Accelerate를 통해 NCCL을 사용한다.
+이슈 #5의 transport 가용성 진단(SHM/P2P/NET)을 다른 PC에서도 그대로
+재현할 수 있도록, 단일 파일 진단 스크립트 `nccl_diagnose.py`를 repo
+root에 추가한다. 새로운 환경에서 SHM/P2P/NET 가용성과 Accelerate 멀티
+GPU 동작 여부를 한 번에 확인할 수 있게 한다.
+
+### Scope
+- Single-node multi-GPU.
+- 단일 파일, 외부 dependency는 torch + (optional) accelerate.
+- 각 transport 테스트는 별도 subprocess + bounded timeout이라
+  하나가 hang해도 다른 항목 진단을 계속한다.
+- 최종 결과를 stdout 표로 출력 (+ `--report PATH` 옵션 JSON).
+- LP §1 R1 / §4 W1: 진단 도구 작성도 ToDo + 이슈 풀 워크플로우.
+
+### Approach
+1. `argparse` 기반 멀티 모드 (`full` / `worker-torch` / `worker-accelerate`).
+2. 정적 진단(`static_probe`): torch/NCCL 버전, GPU 수·이름, P2P 매트릭스,
+   `/dev/shm` 용량·mount opts, NIC 목록, InfiniBand 유무.
+3. 동적 진단(각 별도 subprocess, NCCL_DEBUG=INFO로 로그 캡처):
+   - `default` — 환경 변수 추가 없음
+   - `shm_only` — `NCCL_P2P_DISABLE=1`
+   - `net_only` — `NCCL_P2P_DISABLE=1 NCCL_SHM_DISABLE=1`
+4. Accelerate 진단:
+   - `notebook_launcher`로 멀티 프로세스 spawn → `Accelerator().reduce`
+   - default env (사용자가 일반 환경에서 마주칠 path 그대로)
+5. 결과 표 + `_parse_transport`로 NCCL 로그에서 실제 선택된 transport
+   파싱해 표시.
+6. 본 환경에서 실행 검증: SHM/NET/Accelerate 동작 확인, default torch는
+   timeout 표기되는 것이 정상.
+
+### Work items
+- [x] Confirm with user (사용자 directive 수령, 진행)
+- [x] Register GitHub issue (`gh issue create`) — #6
+- [x] Write `nccl_diagnose.py` (repo root, single file)
+- [x] 본 환경에서 실행하여 기대 결과 확인
+      (default TIMEOUT under P2P/CUMEM, shm_only PASS via SHM,
+      net_only PASS via NET/Socket, accelerate TIMEOUT under
+      P2P/CUMEM — accelerate가 NCCL 기본 transport 선택을 그대로
+      따른다는 점이 재확인됨; #5 결과와 일관)
+- [x] ruff check + format
+- [x] 검증 로그를 `claude_test/logs/diagnose_{run.log,report.json}`에
+      보관 + claude_test/README.md 갱신
+- [ ] Commit and push
+- [ ] GitHub issue update
+
+### Outcome — diagnostic on current container
+
+```
+Transport tests:
+  mode         status     transport          time
+  ---------------------------------------------------
+  default      TIMEOUT    P2P/CUMEM        90.1s
+  shm_only     PASS       SHM/direct        5.0s
+  net_only     PASS       NET/Socket        4.4s
+  accelerate   TIMEOUT    P2P/CUMEM        90.0s
+```
+
+Findings reflected in script behaviour:
+- `NCCL_DEBUG_FILE` per-test tempdir avoids subprocess pipe-buffer
+  loss when a hung process is SIGKILLed (the early prototype mis-
+  reported `transport=unknown` for the default test on the same env).
+- Accelerate path uses `accelerate launch` CLI rather than
+  `notebook_launcher` because the latter forks (start_method="fork"),
+  which crashes after CUDA init in the worker subprocess.
+- Output is captured via `tempfile.TemporaryFile` rather than
+  `subprocess.PIPE` because grandchildren of the timed-out process
+  inherit the parent's stdout fd and would otherwise keep
+  `proc.communicate()` blocked indefinitely.
+
 ### Outcome — transport availability matrix
 
 | Transport | Available? | Default-selected? | Evidence |

@@ -1,0 +1,148 @@
+{
+  "static": {
+    "torch_version": "2.11.0+cu130",
+    "cuda_available": true,
+    "device_count": 2,
+    "devices": [
+      "NVIDIA H200 NVL",
+      "NVIDIA H200 NVL"
+    ],
+    "nccl_version": "2.28.9",
+    "p2p_matrix": {
+      "0": {
+        "0": null,
+        "1": true
+      },
+      "1": {
+        "0": true,
+        "1": null
+      }
+    },
+    "shm_total_gb": 135.01,
+    "shm_free_gb": 134.93,
+    "shm_mount_options": "rw,nosuid,nodev,inode64",
+    "net_interfaces": [
+      "eth0",
+      "lo"
+    ],
+    "infiniband": false
+  },
+  "results": [
+    {
+      "mode": "default",
+      "status": "TIMEOUT",
+      "transport": "P2P/CUMEM",
+      "elapsed_sec": 90.1,
+      "exit_code": -1,
+      "log_tail": [
+        "111ad7fa61a4:1502428:1505619 [1] NCCL INFO Allocated shareable buffer 0x719239400000 size 2097152 ipcDesc 0x7191e4013140",
+        "111ad7fa61a4:1502428:1505619 [1] NCCL INFO New proxy send connection 8 from local rank 0, transport 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x7cbd68005330",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd68008c00 to fd 74 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x719239600000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd6800ec00 to fd 74 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x71923a000000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd6800a5e0 to fd 74 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x71923a200000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd68010340 to fd 74 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x71923ac00000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd6800bd60 to fd 73 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x71923ae00000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd68011a80 to fd 74 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x71923b800000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd6800d4c0 to fd 74 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x71923ba00000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO UDS converted handle 0x7cbd680131c0 to fd 74 on remote peer 0",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x71923c400000",
+        "111ad7fa61a4:1502428:1502428 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1"
+      ]
+    },
+    {
+      "mode": "shm_only",
+      "status": "PASS",
+      "transport": "SHM/direct",
+      "elapsed_sec": 5.0,
+      "exit_code": 0,
+      "log_tail": [
+        "111ad7fa61a4:1560159:1565841 [1] NCCL INFO New proxy recv connection 1 from local rank 1, transport 1",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7f39a4004fe8",
+        "111ad7fa61a4:1560159:1565841 [1] NCCL INFO CUMEM allocated shareable buffer 0x7f39f4400000 size 9637888",
+        "111ad7fa61a4:1560159:1565841 [1] NCCL INFO New proxy send connection 2 from local rank 1, transport 1",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7f39a4005060",
+        "111ad7fa61a4:1560159:1565841 [1] NCCL INFO CUMEM allocated shareable buffer 0x7f39f4e00000 size 4096",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO Channel 00 : 1[1] -> 0[0] via SHM/direct/direct",
+        "111ad7fa61a4:1560159:1565841 [1] NCCL INFO New proxy send connection 3 from local rank 1, transport 1",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7f39a40050d8",
+        "111ad7fa61a4:1560159:1565841 [1] NCCL INFO CUMEM allocated shareable buffer 0x7f39f5000000 size 4096",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO Channel 01 : 1[1] -> 0[0] via SHM/direct/direct",
+        "111ad7fa61a4:1560159:1565841 [1] NCCL INFO New proxy send connection 4 from local rank 0, transport 0",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x77e6e0005150",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 9637888 ptr 0x7f39f5200000, granularity 2097152",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 4096 ptr 0x7f39f5c00000, granularity 2097152",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 9637888 ptr 0x7f39f5e00000, granularity 2097152",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 4096 ptr 0x7f39f6800000, granularity 2097152",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO comm 0x31f9e8f0 rank 1 nranks 2 cudaDev 1 busId 77000 - Destroy COMPLETE",
+        "111ad7fa61a4:1560159:1560159 [1] NCCL INFO ENV/Plugin: Closing env plugin ncclEnvDefault"
+      ]
+    },
+    {
+      "mode": "net_only",
+      "status": "PASS",
+      "transport": "NET/Socket",
+      "elapsed_sec": 4.4,
+      "exit_code": 0,
+      "log_tail": [
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO ncclCommInitRankConfig comm 0x389959c0 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 77000 commId 0x58b47f28fe891b12 - Init COMPLETE",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 2 total 1.12 (kernels 1.08, alloc 0.00, bootstrap 0.04, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.01, rest 0.00)",
+        "111ad7fa61a4:1569000:1572185 [1] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2",
+        "111ad7fa61a4:1569000:1572188 [0] NCCL INFO [Proxy Progress] Device 1 CPU core 3",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x771f14004f70",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Channel 00/0 : 0[0] -> 1[1] [receive] via NET/Socket/0",
+        "111ad7fa61a4:1569000:1572185 [1] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x771f14004fe8",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Channel 01/0 : 0[0] -> 1[1] [receive] via NET/Socket/0",
+        "111ad7fa61a4:1569000:1572185 [1] NCCL INFO New proxy send connection 2 from local rank 0, transport 2",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x771f14005060",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Channel 00/0 : 1[1] -> 0[0] [send] via NET/Socket/0",
+        "111ad7fa61a4:1569000:1572185 [1] NCCL INFO New proxy send connection 3 from local rank 0, transport 2",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x771f140050d8",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Channel 01/0 : 1[1] -> 0[0] [send] via NET/Socket/0",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 0",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO comm 0x389959c0 rank 1 nranks 2 cudaDev 1 busId 77000 - Destroy COMPLETE",
+        "111ad7fa61a4:1569000:1569000 [1] NCCL INFO ENV/Plugin: Closing env plugin ncclEnvDefault"
+      ]
+    },
+    {
+      "mode": "accelerate",
+      "status": "TIMEOUT",
+      "transport": "P2P/CUMEM",
+      "elapsed_sec": 90.0,
+      "exit_code": -1,
+      "log_tail": [
+        "111ad7fa61a4:1575397:1579342 [1] NCCL INFO Allocated shareable buffer 0x7e51fea00000 size 2097152 ipcDesc 0x7e51ac013140",
+        "111ad7fa61a4:1575397:1579342 [1] NCCL INFO New proxy send connection 8 from local rank 0, transport 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x764bbc005330",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc008c00 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x7e51fec00000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc00ec00 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x7e51ff600000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc00a5e0 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x7e51ff800000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc010340 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x7e5200200000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc00bd60 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x7e5200400000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc011a80 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x7e5200e00000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc00d4c0 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 10485760 ptr 0x7e5201000000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO UDS converted handle 0x764bbc0131c0 to fd 70 on remote peer 0",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Imported shareable buffer device 1 size 2097152 ptr 0x7e5201a00000",
+        "111ad7fa61a4:1575397:1575397 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1"
+      ]
+    }
+  ]
+}
