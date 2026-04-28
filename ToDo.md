@@ -481,3 +481,60 @@ also push those.
 - [x] `git push -u origin master` (also pushes a033dd5, 0d2caf1)
 - [x] Comment on #4 with outcome and close
 - [x] Final ToDo tick + amend if needed
+
+---
+
+## NCCL transport availability diagnosis (SHM / P2P / NET)
+
+### Background
+컨테이너 내에서 NCCL이 어떤 transport(SHM, P2P, NET)를 실제로 쓸 수
+있는지 파악한다. 환경은 Docker `--shm-size=60g`, GPU 2x H200 NVL.
+범위는 single-node multi-GPU(같은 컨테이너 안 2 GPU)로 한정한다.
+외부로 개방된 포트는 17040-17046이지만 single-node에서는 loopback만
+쓰므로 외부 포트 개방 여부는 NCCL transport 가용성에 영향이 없다
+(메모용 기록). 본 진단은 ToDo#3의 `nccl_check.py` hang(paused)과 같은
+컨테이너에서 진행되므로 hang 원인 후보를 좁히는 근거로도 활용된다.
+
+### Scope
+- Single-node multi-GPU (intra-container, 2x H200 NVL).
+- Multi-node는 범위 외.
+- LP §1 R1 / §4 W1: 진단/정보성 작업도 ToDo + 이슈 풀 워크플로우 적용.
+
+### Approach
+1. SHM 정적 진단 — `df -h /dev/shm`, mount option, `ipcs -m`.
+2. P2P 정적 진단 — `nvidia-smi topo -m`, `nvidia-smi nvlink -s`,
+   `/dev/nvidia*` 접근성, IOMMU group 상태.
+3. NET 정적 진단 — `ip -br link`, `ibv_devinfo`(있으면), lo 상태.
+4. (옵션) bounded NCCL run: `NCCL_DEBUG=INFO`
+   `NCCL_DEBUG_SUBSYS=INIT,NET,P2P,SHM` 90s timeout, log를
+   `claude_test/logs/nccl_init.log`에 캡처.
+5. SHM/P2P/NET 가용성 표 작성 (Available / Blocked / Conditional).
+
+### Work items
+- [x] Confirm scope with user (single-node, ports 17040-17046)
+- [x] Register GitHub issue (`gh issue create`) — #5
+- [x] SHM static checks
+- [x] P2P static checks
+- [x] NET static checks
+- [x] Bounded NCCL run with NCCL_DEBUG=INFO + log capture
+      (default, NCCL_P2P_DISABLE=1, NCCL_P2P_DISABLE+NCCL_SHM_DISABLE,
+      and a set_device-first variant)
+- [x] Summary table (SHM/P2P/NET — Available / Blocked / Conditional)
+- [ ] Commit and push (ToDo update + claude_test additions)
+- [ ] GitHub issue update
+
+### Outcome — transport availability matrix
+
+| Transport | Available? | Default-selected? | Evidence |
+|-----------|-----------|-------------------|----------|
+| **SHM**   | Yes       | No (P2P preferred) | `/dev/shm` is 126 GB tmpfs `rw,nosuid,nodev` (no `noexec`), 1777 perms. With `NCCL_P2P_DISABLE=1` NCCL uses `SHM/direct/direct` and `all_reduce` returns the correct sum (`logs/nccl_p2p_disabled.log`). |
+| **P2P (CUDA peer-to-peer)** | Selectable but hangs | Yes (`P2P/CUMEM`) | `cudaCanAccessPeer(0,1)`/`(1,0)` both `True`. GPUs 0000:76:00.0 / 0000:77:00.0 share PCIe switch `0000:71:00.0` (PIX). PCIe Gen5 x16, **no NVLink bridge**. NCCL chooses `P2P/CUMEM` for all 4 channels and finishes init in 0.8 s, but `all_reduce` hangs (timeout 90 s — `logs/nccl_init.log`). Calling `cuda.set_device` before `init_process_group` does **not** unstick it (`logs/nccl_devfix.log`). Root cause is out of scope for this issue and stays under #3. |
+| **NET (Socket)** | Yes | No (loopback path inferred from PCIe) | InfiniBand absent (`/sys/class/infiniband` empty, `ibv_devinfo` not installed; NCCL logs `transport/net_ib.cc:852 -> 3` and falls back). With `NCCL_P2P_DISABLE=1 NCCL_SHM_DISABLE=1` NCCL uses `NET/Socket/0` over `eth0` (172.17.0.2) and `all_reduce` succeeds (`logs/nccl_net_only.log`). External port range 17040-17046 does not bear on single-node operation. |
+
+### Practical guidance
+- For single-node 2x H200 NVL with NCCL **today**, the working transports
+  are **SHM** and **NET**.
+- A correct collective can be obtained by running with
+  `NCCL_P2P_DISABLE=1` until the P2P/CUMEM hang in #3 is resolved.
+- The hang is **not** caused by SHM size, port openness, IOMMU directive
+  (none on the host cmdline), or `set_device` ordering.

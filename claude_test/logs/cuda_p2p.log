@@ -1,0 +1,6 @@
+device_count=2
+  cuda:0 = NVIDIA H200 NVL
+  cuda:1 = NVIDIA H200 NVL
+can_device_access_peer matrix:
+  from cuda:0 -> ['  -  ', ' yes ']
+  from cuda:1 -> [' yes ', '  -  ']

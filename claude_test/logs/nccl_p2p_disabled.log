@@ -1,0 +1,109 @@
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO cudaDriverVersion 13000
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO NCCL version 2.28.9+cuda13.0
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Failed to open libibverbs.so[.1]
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO transport/net_ib.cc:852 -> 3
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Failed to initialize NET plugin IB
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO NET/Socket : Using [0]eth0:172.17.0.2<0>
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Initialized NET plugin Socket
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Assigned NET plugin Socket to comm
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Using network Socket
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO ncclCommInitRankConfig comm 0x1472a590 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 76000 commId 0x5b24ede2a1ba506a - Init START
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO RAS client listening socket at ::1<28028>
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 0 is 0-7,16-23. (GPU affinity = 0-7,16-23 ; CPU affinity = 0-31).
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO NVLS multicast support is not available on dev 0 (NVLS_NCHANNELS 0)
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO comm 0x1472a590 rank 0 nRanks 2 nNodes 1 localRanks 2 localRank 0 MNNVL 0
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Channel 00/02 : 0 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Channel 01/02 : 0 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO P2P Chunksize set to 131072
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0 isAllCudaP2p 1
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO [Proxy Service] Device 0 CPU core 4
+111ad7fa61a4:2168644:2171829 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 22
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO CC Off, workFifoBytes 1048576
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO ncclCommInitRankConfig comm 0x1472a590 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 76000 commId 0x5b24ede2a1ba506a - Init COMPLETE
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 2 total 0.76 (kernels 0.59, alloc 0.14, bootstrap 0.02, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.01, rest 0.00)
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x70c754004f70
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO CUMEM allocated shareable buffer 0x70c79d000000 size 9637888
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x70c754004fe8
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO CUMEM allocated shareable buffer 0x70c79da00000 size 9637888
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x70c754005060
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO CUMEM allocated shareable buffer 0x70c79e400000 size 4096
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Channel 00 : 0[0] -> 1[1] via SHM/direct/direct
+11111ad7fa61a4:2168645:2168645 [1] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO cudaDriverVersion 13000
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO NCCL version 2.28.9+cuda13.0
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Failed to open libibverbs.so[.1]
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO transport/net_ib.cc:852 -> 3
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Failed to initialize NET plugin IB
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO NET/Socket : Using [0]eth0:172.17.0.2<0>
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Initialized NET plugin Socket
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Assigned NET plugin Socket to comm
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Using network Socket
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO ncclCommInitRankConfig comm 0x2d03b690 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 77000 commId 0x5b24ede2a1ba506a - Init START
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO RAS client listening socket at ::1<28028>
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 1 is 0-7,16-23. (GPU affinity = 0-7,16-23 ; CPU affinity = 0-31).
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO NVLS multicast support is not available on dev 1 (NVLS_NCHANNELS 0)
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO comm 0x2d03b690 rank 1 nRanks 2 nNodes 1 localRanks 2 localRank 1 MNNVL 0
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO P2P Chunksize set to 131072
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0 isAllCudaP2p 1
+111ad7fa61a4:2168645:2171828 [0] NCCL INFO [Proxy Service UDS] Device 1 CPU core 22
+111ad7fa61a4:2168645:2171827 [0] NCCL INFO [Proxy Service] Device 1 CPU core 4
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO ncclCommInitRankConfig comm 0x2d03b690 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 77000 commId 0x5b24ede2a1ba506a - Init COMPLETE
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 2 total 0.76 (kernels 0.61, alloc 0.12, bootstrap 0.02, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.01, rest 0.00)
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO New proxy recv connection 0 from local rank 1, transport 1
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7e285c004f40
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO CUMEM allocated shareable buffer 0x7e28ab000000 size 9637888
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO New proxy recv connection 1 from local rank 1, transport 1
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7e285c004fb8
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO CUMEM allocated shareable buffer 0x7e28aba00000 size 9637888
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO New proxy send connection 2 from local rank 1, transport 1
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7e285c005030
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO CUMEM allocated shareable buffer 0x7e28ac400000 size 4096
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Channel 00 : 1[1] -> 0[0] via SHM/direct/direct
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO New proxy send connection 3 from local rank 1, transport 1
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7e285c005[rank 0] all_reduce 결과: 3.0  (기대값: 3)
+1ad7fa61a4:2168644:2171826 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x70c7540050d8
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO CUMEM allocated shareable buffer 0x70c79e600000 size 4096
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Channel 01 : 0[0] -> 1[1] via SHM/direct/direct
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Connected to proxy localRank 1 -> connection 0x7e285c005120
+111ad7fa61a4:2168644:2171826 [0] NCCL INFO New proxy send connection 4 from local rank 1, transport 0
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO CUMEM imported shareable host buffer from proxyRank 1 size 9637888 ptr 0x70c79e800000, granularity 2097152
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO CUMEM imported shareable host buffer from proxyRank 1 size 4096 ptr 0x70c79f200000, granularity 2097152
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO CUMEM imported shareable host buffer from proxyRank 1 size 9637888 ptr 0x70c79f400000, granularity 2097152
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO CUMEM imported shareable host buffer from proxyRank 1 size 4096 ptr 0x70c79fe00000, granularity 2097152
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO comm 0x1472a590 rank 0 nranks 2 cudaDev 0 busId 76000 - Destroy COMPLETE
+[rank 1] all_reduce 결과: 3.0  (기대값: 3)
+0a8
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO CUMEM allocated shareable buffer 0x7e28ac600000 size 4096
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Channel 01 : 1[1] -> 0[0] via SHM/direct/direct
+111ad7fa61a4:2168645:2171827 [1] NCCL INFO New proxy send connection 4 from local rank 0, transport 0
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Connected to proxy localRank 0 -> connection 0x70c754005150
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 9637888 ptr 0x7e28ac800000, granularity 2097152
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 4096 ptr 0x7e28ad200000, granularity 2097152
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 9637888 ptr 0x7e28ad400000, granularity 2097152
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO CUMEM imported shareable host buffer from proxyRank 0 size 4096 ptr 0x7e28ade00000, granularity 2097152
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO comm 0x2d03b690 rank 1 nranks 2 cudaDev 1 busId 77000 - Destroy COMPLETE
+111ad7fa61a4:2168644:2168644 [0] NCCL INFO ENV/Plugin: Closing env plugin ncclEnvDefault
+111ad7fa61a4:2168645:2168645 [1] NCCL INFO ENV/Plugin: Closing env plugin ncclEnvDefault
