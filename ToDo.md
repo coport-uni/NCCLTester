@@ -520,8 +520,8 @@ also push those.
       (default, NCCL_P2P_DISABLE=1, NCCL_P2P_DISABLE+NCCL_SHM_DISABLE,
       and a set_device-first variant)
 - [x] Summary table (SHM/P2P/NET — Available / Blocked / Conditional)
-- [ ] Commit and push (ToDo update + claude_test additions)
-- [ ] GitHub issue update
+- [x] Commit and push (ToDo update + claude_test additions) (a3fb564)
+- [x] GitHub issue update (#5 closed via Closes-trailer; outcome comment added)
 
 ### Outcome — transport availability matrix
 
